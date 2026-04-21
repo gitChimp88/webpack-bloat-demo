@@ -1,19 +1,17 @@
 import React from "react";
-import {
-  Box,
-  Paper,
-  Table,
-  TableBody,
-  TableCell,
-  TableHead,
-  TableRow,
-  Avatar,
-  Chip,
-  Switch,
-  TextField,
-  Pagination,
-} from "@mui/material";
-import { Search } from "@mui/icons-material";
+import Box from "@mui/material/Box";
+import Paper from "@mui/material/Paper";
+import Table from "@mui/material/Table";
+import TableBody from "@mui/material/TableBody";
+import TableCell from "@mui/material/TableCell";
+import TableHead from "@mui/material/TableHead";
+import TableRow from "@mui/material/TableRow";
+import Avatar from "@mui/material/Avatar";
+import Chip from "@mui/material/Chip";
+import Switch from "@mui/material/Switch";
+import TextField from "@mui/material/TextField";
+import Pagination from "@mui/material/Pagination";
+import Search from "@mui/icons-material/Search";
 
 function UserTable({ data }) {
   return (

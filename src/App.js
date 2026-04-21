@@ -1,7 +1,6 @@
 import React, { useState, Suspense } from "react";
 
-// Full lodash import — pulls in all 70+ utilities (~72kB gzipped)
-import _ from "lodash";
+import { times, startCase, uniqueId, random, sample, filter, includes, meanBy, size } from "lodash-es";
 
 // Full moment import — pulls in all 160+ locales (~66kB gzipped)
 import moment from "moment";
@@ -22,70 +21,37 @@ import "moment/locale/sv";
 import "moment/locale/pl";
 import "moment/locale/tr";
 
-// Barrel import from @mui/material — prevents tree shaking of MUI
-import {
-  Button,
-  Typography,
-  Container,
-  Box,
-  Card,
-  CardContent,
-  AppBar,
-  Toolbar,
-  Drawer,
-  List,
-  ListItem,
-  ListItemText,
-  Divider,
-  Badge,
-  Tooltip,
-  Stack,
-  Alert,
-  Tabs,
-  Tab,
-} from "@mui/material";
-
-// Barrel import from @mui/icons-material — tree shaking cannot work on barrel exports
-import {
-  Home,
-  Settings,
-  Search,
-  Add,
-  Delete,
-  Edit,
-  Save,
-  Cancel,
-  Check,
-  Close,
-  Menu,
-  ArrowBack,
-  ArrowForward,
-  ChevronLeft,
-  ChevronRight,
-  Favorite,
-  FavoriteBorder,
-  Star,
-  StarBorder,
-  Visibility,
-  VisibilityOff,
-  Download,
-  Upload,
-  Share,
-  Print,
-  Refresh,
-  FilterList,
-  Sort,
-  MoreVert,
-  Notifications,
-  NotificationsOff,
-  Person,
-  Group,
-  Lock,
-  LockOpen,
-  Info,
-  Warning,
-  Error as ErrorIcon,
-} from "@mui/icons-material";
+import Button from "@mui/material/Button";
+import Typography from "@mui/material/Typography";
+import Container from "@mui/material/Container";
+import Box from "@mui/material/Box";
+import Card from "@mui/material/Card";
+import CardContent from "@mui/material/CardContent";
+import AppBar from "@mui/material/AppBar";
+import Toolbar from "@mui/material/Toolbar";
+import Drawer from "@mui/material/Drawer";
+import List from "@mui/material/List";
+import ListItem from "@mui/material/ListItem";
+import ListItemText from "@mui/material/ListItemText";
+import Divider from "@mui/material/Divider";
+import Badge from "@mui/material/Badge";
+import Tooltip from "@mui/material/Tooltip";
+import Stack from "@mui/material/Stack";
+import Alert from "@mui/material/Alert";
+import Tabs from "@mui/material/Tabs";
+import Tab from "@mui/material/Tab";
+import Home from "@mui/icons-material/Home";
+import Settings from "@mui/icons-material/Settings";
+import Check from "@mui/icons-material/Check";
+import Menu from "@mui/icons-material/Menu";
+import Star from "@mui/icons-material/Star";
+import FilterList from "@mui/icons-material/FilterList";
+import Sort from "@mui/icons-material/Sort";
+import Notifications from "@mui/icons-material/Notifications";
+import Person from "@mui/icons-material/Person";
+import Group from "@mui/icons-material/Group";
+import Lock from "@mui/icons-material/Lock";
+import Info from "@mui/icons-material/Info";
 
 // Importing utility files that each have their own redundant logic
 import { formatData } from "./utils/formatData";
@@ -112,12 +78,12 @@ const salesData = {
   ],
 };
 
-const users = _.times(20, (i) => ({
+const users = times(20, (i) => ({
   id: i + 1,
-  name: _.startCase(_.uniqueId("user_")),
-  joined: moment().subtract(_.random(1, 365), "days").format("MMMM Do YYYY"),
-  score: _.random(1, 100),
-  active: _.sample([true, false]),
+  name: startCase(uniqueId("user_")),
+  joined: moment().subtract(random(1, 365), "days").format("MMMM Do YYYY"),
+  score: random(1, 100),
+  active: sample([true, false]),
 }));
 
 // ---- Subcomponents ------------------------------------------------------------
@@ -146,12 +112,12 @@ export default function App() {
   const [searchQuery, setSearchQuery] = useState("");
   const [sliderValue, setSliderValue] = useState(30);
 
-  const filteredUsers = _.filter(users, (u) =>
-    _.includes(u.name.toLowerCase(), searchQuery.toLowerCase()),
+  const filteredUsers = filter(users, (u) =>
+    includes(u.name.toLowerCase(), searchQuery.toLowerCase()),
   );
 
-  const avgScore = _.meanBy(users, "score").toFixed(1);
-  const activeCount = _.filter(users, "active").length;
+  const avgScore = meanBy(users, "score").toFixed(1);
+  const activeCount = filter(users, "active").length;
 
   const report = generateReport(users);
   const formattedData = formatData(salesData);
@@ -229,8 +195,7 @@ export default function App() {
         </Suspense>
 
         <Alert severity="info" sx={{ mt: 3 }}>
-          Built {moment().fromNow()} · Lodash version {_.VERSION} ·{" "}
-          {_.size(users)} users loaded
+          Built {moment().fromNow()} · {size(users)} users loaded
         </Alert>
       </Container>
     </Box>

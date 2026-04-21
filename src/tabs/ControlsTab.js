@@ -1,25 +1,23 @@
 import React from "react";
-import {
-  Grid,
-  Paper,
-  Typography,
-  Slider,
-  LinearProgress,
-  Accordion,
-  AccordionSummary,
-  AccordionDetails,
-  Stack,
-  FormControl,
-  FormLabel,
-  InputLabel,
-  Select,
-  MenuItem,
-  RadioGroup,
-  Radio,
-  Box,
-  Checkbox,
-} from "@mui/material";
-import { ExpandMore } from "@mui/icons-material";
+import Grid from "@mui/material/Grid";
+import Paper from "@mui/material/Paper";
+import Typography from "@mui/material/Typography";
+import Slider from "@mui/material/Slider";
+import LinearProgress from "@mui/material/LinearProgress";
+import Accordion from "@mui/material/Accordion";
+import AccordionSummary from "@mui/material/AccordionSummary";
+import AccordionDetails from "@mui/material/AccordionDetails";
+import Stack from "@mui/material/Stack";
+import FormControl from "@mui/material/FormControl";
+import FormLabel from "@mui/material/FormLabel";
+import InputLabel from "@mui/material/InputLabel";
+import Select from "@mui/material/Select";
+import MenuItem from "@mui/material/MenuItem";
+import RadioGroup from "@mui/material/RadioGroup";
+import Radio from "@mui/material/Radio";
+import Box from "@mui/material/Box";
+import Checkbox from "@mui/material/Checkbox";
+import ExpandMore from "@mui/icons-material/ExpandMore";
 
 export default function ControlsTab({ sliderValue, setSliderValue }) {
   return (

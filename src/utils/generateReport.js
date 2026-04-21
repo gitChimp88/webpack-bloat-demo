@@ -1,5 +1,4 @@
-// Yet another full moment + lodash import
-import _ from "lodash";
+import { size, forEach, meanBy, filter } from "lodash-es";
 import moment from "moment";
 import "moment/locale/fr";
 import "moment/locale/de";
@@ -15,17 +14,17 @@ export function generateReport(users) {
   const lines = [];
 
   lines.push(`Report generated: ${moment().format("LLLL")}`);
-  lines.push(`Total users: ${_.size(users)}`);
+  lines.push(`Total users: ${size(users)}`);
 
-  _.forEach(users, (user) => {
+  forEach(users, (user) => {
     lines.push(
       `[${user.id}] ${user.name} — joined ${user.joined} — score: ${user.score}`,
     );
   });
 
   lines.push(`---`);
-  lines.push(`Mean score: ${_.meanBy(users, "score").toFixed(2)}`);
-  lines.push(`Active users: ${_.filter(users, "active").length}`);
+  lines.push(`Mean score: ${meanBy(users, "score").toFixed(2)}`);
+  lines.push(`Active users: ${filter(users, "active").length}`);
   lines.push(`French timestamp: ${moment().locale("fr").format("LLLL")}`);
   lines.push(`German timestamp: ${moment().locale("de").format("LLLL")}`);
 

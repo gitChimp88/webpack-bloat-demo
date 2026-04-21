@@ -1,5 +1,4 @@
-// Re-imports lodash in every utility file instead of sharing a single import
-import _ from "lodash";
+import { map, cloneDeep, round } from "lodash-es";
 import moment from "moment";
 
 /**
@@ -13,7 +12,7 @@ export function formatData(chartData) {
     datasets: chartData.datasets.map((dataset) => ({
       ...dataset,
       // Pointlessly use lodash to clone and map
-      data: _.map(_.cloneDeep(dataset.data), (v) => _.round(v * 1.0, 2)),
+      data: map(cloneDeep(dataset.data), (v) => round(v * 1.0, 2)),
       label: `${dataset.label} (as of ${moment().format("MMM YYYY")})`,
     })),
   };

@@ -40,13 +40,10 @@ module.exports = (env = {}) => ({
   },
 
   optimization: {
-    // No tree shaking
-    usedExports: false,
+    usedExports: true,
     // No minification
     minimize: false,
-    // No chunk splitting — everything in one giant bundle
     splitChunks: { chunks: "all" },
-    // Keep runtime in main bundle
     runtimeChunk: "single",
   },
 
