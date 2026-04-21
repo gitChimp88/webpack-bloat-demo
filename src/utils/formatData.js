@@ -1,9 +1,8 @@
 import { map, cloneDeep, round } from "lodash-es";
-import moment from "moment";
+import dayjs from "dayjs";
+import localizedFormat from "dayjs/plugin/localizedFormat";
+dayjs.extend(localizedFormat);
 
-/**
- * Formats chart data — an excuse to pull in lodash + moment a second time.
- */
 export function formatData(chartData) {
   if (!chartData || !chartData.datasets) return null;
 
@@ -13,7 +12,7 @@ export function formatData(chartData) {
       ...dataset,
       // Pointlessly use lodash to clone and map
       data: map(cloneDeep(dataset.data), (v) => round(v * 1.0, 2)),
-      label: `${dataset.label} (as of ${moment().format("MMM YYYY")})`,
+      label: `${dataset.label} (as of ${dayjs().format("MMM YYYY")})`,
     })),
   };
 }

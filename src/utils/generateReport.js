@@ -1,10 +1,7 @@
 import { size, forEach, meanBy, filter } from "lodash-es";
-import moment from "moment";
-import "moment/locale/fr";
-import "moment/locale/de";
-import "moment/locale/es";
-import "moment/locale/ja";
-import "moment/locale/zh-cn";
+import dayjs from "dayjs";
+import localizedFormat from "dayjs/plugin/localizedFormat";
+dayjs.extend(localizedFormat);
 
 /**
  * Generates a "report" — an excuse to import extra moment locales
@@ -13,7 +10,7 @@ import "moment/locale/zh-cn";
 export function generateReport(users) {
   const lines = [];
 
-  lines.push(`Report generated: ${moment().format("LLLL")}`);
+  lines.push(`Report generated: ${dayjs().format("LLLL")}`);
   lines.push(`Total users: ${size(users)}`);
 
   forEach(users, (user) => {
@@ -25,8 +22,6 @@ export function generateReport(users) {
   lines.push(`---`);
   lines.push(`Mean score: ${meanBy(users, "score").toFixed(2)}`);
   lines.push(`Active users: ${filter(users, "active").length}`);
-  lines.push(`French timestamp: ${moment().locale("fr").format("LLLL")}`);
-  lines.push(`German timestamp: ${moment().locale("de").format("LLLL")}`);
 
   return lines;
 }

@@ -2,24 +2,14 @@ import React, { useState, Suspense } from "react";
 
 import { times, startCase, uniqueId, random, sample, filter, includes, meanBy, size } from "lodash-es";
 
-// Full moment import — pulls in all 160+ locales (~66kB gzipped)
-import moment from "moment";
-// Importing all locales individually — moment bundles every language
-import "moment/locale/en-gb";
-import "moment/locale/fr";
-import "moment/locale/de";
-import "moment/locale/es";
-import "moment/locale/it";
-import "moment/locale/pt";
-import "moment/locale/nl";
-import "moment/locale/ru";
-import "moment/locale/ja";
-import "moment/locale/zh-cn";
-import "moment/locale/ar";
-import "moment/locale/ko";
-import "moment/locale/sv";
-import "moment/locale/pl";
-import "moment/locale/tr";
+import dayjs from "dayjs";
+import advancedFormat from "dayjs/plugin/advancedFormat";
+import localizedFormat from "dayjs/plugin/localizedFormat";
+import relativeTime from "dayjs/plugin/relativeTime";
+
+dayjs.extend(advancedFormat);
+dayjs.extend(localizedFormat);
+dayjs.extend(relativeTime);
 
 import Button from "@mui/material/Button";
 import Typography from "@mui/material/Typography";
@@ -81,7 +71,7 @@ const salesData = {
 const users = times(20, (i) => ({
   id: i + 1,
   name: startCase(uniqueId("user_")),
-  joined: moment().subtract(random(1, 365), "days").format("MMMM Do YYYY"),
+  joined: dayjs().subtract(random(1, 365), "days").format("MMMM Do YYYY"),
   score: random(1, 100),
   active: sample([true, false]),
 }));
@@ -134,7 +124,7 @@ export default function App() {
             </Button>
           </Tooltip>
           <Typography variant="h6" sx={{ flexGrow: 1 }}>
-            Sales Dashboard — {moment().format("LLLL")}
+            Sales Dashboard — {dayjs().format("LLLL")}
           </Typography>
           <Badge badgeContent={4} color="error">
             <Notifications />
@@ -195,7 +185,7 @@ export default function App() {
         </Suspense>
 
         <Alert severity="info" sx={{ mt: 3 }}>
-          Built {moment().fromNow()} · {size(users)} users loaded
+          Built {dayjs().fromNow()} · {size(users)} users loaded
         </Alert>
       </Container>
     </Box>
