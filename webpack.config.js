@@ -13,8 +13,7 @@ module.exports = (env = {}) => ({
     clean: true,
   },
 
-  // Most expensive source map option — full source maps in production
-  devtool: "eval-source-map",
+  devtool: "source-map",
 
   module: {
     rules: [
