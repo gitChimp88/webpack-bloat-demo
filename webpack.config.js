@@ -3,8 +3,7 @@ const HtmlWebpackPlugin = require("html-webpack-plugin");
 const { BundleAnalyzerPlugin } = require("webpack-bundle-analyzer");
 
 module.exports = (env = {}) => ({
-  // Development mode in production = no minification, full source maps
-  mode: "development",
+  mode: "production",
 
   entry: "./src/index.js",
 
@@ -46,9 +45,9 @@ module.exports = (env = {}) => ({
     // No minification
     minimize: false,
     // No chunk splitting — everything in one giant bundle
-    splitChunks: false,
+    splitChunks: "all",
     // Keep runtime in main bundle
-    runtimeChunk: false,
+    runtimeChunk: "single",
   },
 
   plugins: [
