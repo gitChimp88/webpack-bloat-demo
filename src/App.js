@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, Suspense } from "react";
 
 // Full lodash import — pulls in all 70+ utilities (~72kB gzipped)
 import _ from "lodash";
@@ -92,10 +92,10 @@ import { formatData } from "./utils/formatData";
 import { processStats } from "./utils/processStats";
 import { generateReport } from "./utils/generateReport";
 
-// Tab panels — imported statically (no code splitting)
-import ChartsTab from "./tabs/ChartsTab";
-import UsersTab from "./tabs/UsersTab";
-import ControlsTab from "./tabs/ControlsTab";
+// Tab panels — lazily loaded, each becomes its own chunk
+const ChartsTab = React.lazy(() => import("./tabs/ChartsTab"));
+const UsersTab = React.lazy(() => import("./tabs/UsersTab"));
+const ControlsTab = React.lazy(() => import("./tabs/ControlsTab"));
 
 // ---- Fake data ----------------------------------------------------------------
 
@@ -214,17 +214,19 @@ export default function App() {
           <Tab label="Controls" icon={<Settings />} iconPosition="start" />
         </Tabs>
 
-        {tab === 0 && <ChartsTab formattedData={formattedData} />}
-        {tab === 1 && (
-          <UsersTab
-            filteredUsers={filteredUsers}
-            searchQuery={searchQuery}
-            setSearchQuery={setSearchQuery}
-          />
-        )}
-        {tab === 2 && (
-          <ControlsTab sliderValue={sliderValue} setSliderValue={setSliderValue} />
-        )}
+        <Suspense fallback={<div>Loading...</div>}>
+          {tab === 0 && <ChartsTab formattedData={formattedData} />}
+          {tab === 1 && (
+            <UsersTab
+              filteredUsers={filteredUsers}
+              searchQuery={searchQuery}
+              setSearchQuery={setSearchQuery}
+            />
+          )}
+          {tab === 2 && (
+            <ControlsTab sliderValue={sliderValue} setSliderValue={setSliderValue} />
+          )}
+        </Suspense>
 
         <Alert severity="info" sx={{ mt: 3 }}>
           Built {moment().fromNow()} · Lodash version {_.VERSION} ·{" "}

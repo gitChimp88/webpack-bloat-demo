@@ -9,7 +9,7 @@ module.exports = (env = {}) => ({
 
   output: {
     path: path.resolve(__dirname, "dist"),
-    filename: "bundle.js",
+    filename: "[name].bundle.js",
     clean: true,
   },
 
@@ -45,7 +45,7 @@ module.exports = (env = {}) => ({
     // No minification
     minimize: false,
     // No chunk splitting — everything in one giant bundle
-    splitChunks: "all",
+    splitChunks: { chunks: "all" },
     // Keep runtime in main bundle
     runtimeChunk: "single",
   },
