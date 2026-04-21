@@ -3,10 +3,6 @@ import dayjs from "dayjs";
 import localizedFormat from "dayjs/plugin/localizedFormat";
 dayjs.extend(localizedFormat);
 
-/**
- * Generates a "report" — an excuse to import extra moment locales
- * that will never be switched to at runtime.
- */
 export function generateReport(users) {
   const lines = [];
 
