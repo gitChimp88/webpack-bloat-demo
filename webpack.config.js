@@ -59,8 +59,9 @@ module.exports = (env = {}) => ({
     ...(env.analyze ? [new BundleAnalyzerPlugin()] : []),
   ],
 
-  // No performance warnings so we don't see how bad it is
   performance: {
-    hints: false,
+    hints: "warning",
+    maxAssetSize: 500000,
+    maxEntrypointSize: 500000,
   },
 });
