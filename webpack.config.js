@@ -1,6 +1,7 @@
 const path = require("path");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
 const { BundleAnalyzerPlugin } = require("webpack-bundle-analyzer");
+const CompressionPlugin = require("compression-webpack-plugin");
 
 module.exports = (env = {}) => ({
   mode: "production",
@@ -48,6 +49,12 @@ module.exports = (env = {}) => ({
   plugins: [
     new HtmlWebpackPlugin({
       template: "./src/index.html",
+    }),
+    new CompressionPlugin({
+      algorithm: "gzip",
+      test: /\.js$/,
+      threshold: 10240,
+      minRatio: 0.8,
     }),
     ...(env.analyze ? [new BundleAnalyzerPlugin()] : []),
   ],
