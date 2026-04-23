@@ -14,16 +14,9 @@ import {
   Tooltip as ChartTooltip,
   Legend,
   Filler,
-  TimeScale,
-  TimeSeriesScale,
-  LogarithmicScale,
-  BubbleController,
   DoughnutController,
   LineController,
-  PieController,
-  PolarAreaController,
   RadarController,
-  ScatterController,
   BarController,
 } from "chart.js";
 import { Line, Bar, Doughnut, Radar } from "react-chartjs-2";
@@ -40,16 +33,9 @@ ChartJS.register(
   ChartTooltip,
   Legend,
   Filler,
-  TimeScale,
-  TimeSeriesScale,
-  LogarithmicScale,
-  BubbleController,
   DoughnutController,
   LineController,
-  PieController,
-  PolarAreaController,
   RadarController,
-  ScatterController,
   BarController,
 );
 
